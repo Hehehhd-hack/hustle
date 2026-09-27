@@ -1,0 +1,2742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUSTLE. — Side Hustles Built For Teens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   HUSTLE. — Design System
+   ============================================================ */
+:root{
+  --bg:#0a0a0f;
+  --bg-2:#0f0f16;
+  --bg-3:#14141d;
+  --surface:#16161f;
+  --surface-2:#1c1c27;
+  --border:#242432;
+  --border-2:#2e2e3f;
+  --text:#f2f2f7;
+  --text-dim:#9a9aad;
+  --text-mute:#5c5c70;
+  --accent:#00e5a0;
+  --accent-2:#00b8ff;
+  --accent-3:#ff2e88;
+  --accent-4:#ffd60a;
+  --accent-5:#a855f7;
+  --grad-1:linear-gradient(135deg,#00e5a0 0%,#00b8ff 100%);
+  --grad-2:linear-gradient(135deg,#ff2e88 0%,#ffd60a 100%);
+  --grad-3:linear-gradient(135deg,#a855f7 0%,#00e5a0 100%);
+  --grad-4:linear-gradient(135deg,#00b8ff 0%,#a855f7 100%);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow:0 4px 24px rgba(0,0,0,.5);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.6);
+  --shadow-glow:0 0 40px rgba(0,229,160,.15);
+  --r-sm:8px;
+  --r:14px;
+  --r-lg:20px;
+  --r-xl:28px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+::selection{background:var(--accent);color:var(--bg)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg-2)}
+::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:10px;border:2px solid var(--bg-2)}
+::-webkit-scrollbar-thumb:hover{background:var(--text-mute)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;color:inherit}
+img{max-width:100%;display:block}
+
+/* ============================================================
+   Animated Background
+   ============================================================ */
+.bg-canvas{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+.bg-orbs{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:.35;
+  animation:float 20s ease-in-out infinite;
+}
+.orb-1{width:500px;height:500px;background:var(--accent);top:-10%;left:-5%;animation-delay:0s}
+.orb-2{width:400px;height:400px;background:var(--accent-5);top:40%;right:-10%;animation-delay:-7s}
+.orb-3{width:450px;height:450px;background:var(--accent-2);bottom:-15%;left:30%;animation-delay:-14s}
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(60px,-40px) scale(1.1)}
+  66%{transform:translate(-40px,60px) scale(.95)}
+}
+
+/* ============================================================
+   Nav
+   ============================================================ */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  padding:16px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  transition:all .3s ease;
+  backdrop-filter:blur(0px);
+}
+.nav.scrolled{
+  background:rgba(10,10,15,.75);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:12px 32px;
+}
+.nav-logo{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:22px;
+  letter-spacing:-.5px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  z-index:2;
+}
+.nav-logo .dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 12px var(--accent);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(.8)}
+}
+.nav-links{
+  display:flex;
+  gap:32px;
+  align-items:center;
+}
+.nav-link{
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-dim);
+  transition:color .2s;
+  position:relative;
+}
+.nav-link:hover{color:var(--text)}
+.nav-link::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;left:0;
+  width:0;height:2px;
+  background:var(--accent);
+  transition:width .3s;
+}
+.nav-link:hover::after{width:100%}
+.nav-cta{
+  padding:10px 20px;
+  background:var(--grad-1);
+  color:var(--bg);
+  font-weight:600;
+  font-size:14px;
+  border-radius:100px;
+  transition:transform .2s,box-shadow .2s;
+}
+.nav-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,229,160,.3);
+}
+.nav-burger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  padding:8px;
+  z-index:2;
+}
+.nav-burger span{
+  width:24px;height:2px;
+  background:var(--text);
+  transition:all .3s;
+  border-radius:2px;
+}
+.nav-burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:120px 32px 80px;
+  text-align:center;
+}
+.hero-inner{max-width:1000px;width:100%}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 16px;
+  background:rgba(0,229,160,.08);
+  border:1px solid rgba(0,229,160,.25);
+  border-radius:100px;
+  font-size:13px;
+  font-weight:500;
+  color:var(--accent);
+  margin-bottom:28px;
+  animation:fadeUp .8s ease both;
+}
+.hero-badge .pulse{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+  animation:pulse 1.5s ease-in-out infinite;
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(44px,8vw,96px);
+  font-weight:700;
+  line-height:1.02;
+  letter-spacing:-3px;
+  margin-bottom:24px;
+  animation:fadeUp .8s ease .1s both;
+}
+.hero h1 .grad{
+  background:var(--grad-1);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero h1 .grad-2{
+  background:var(--grad-2);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  font-size:clamp(16px,2vw,20px);
+  color:var(--text-dim);
+  max-width:620px;
+  margin:0 auto 40px;
+  line-height:1.6;
+  animation:fadeUp .8s ease .2s both;
+}
+.hero-actions{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+  animation:fadeUp .8s ease .3s both;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 28px;
+  border-radius:100px;
+  font-size:15px;
+  font-weight:600;
+  transition:all .2s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--grad-1);
+  color:var(--bg);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(0,229,160,.35);
+}
+.btn-ghost{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border-2);
+  color:var(--text);
+}
+.btn-ghost:hover{
+  background:rgba(255,255,255,.08);
+  border-color:var(--text-mute);
+  transform:translateY(-2px);
+}
+.hero-stats{
+  display:flex;
+  gap:48px;
+  justify-content:center;
+  margin-top:64px;
+  flex-wrap:wrap;
+  animation:fadeUp .8s ease .4s both;
+}
+.hero-stat{text-align:center}
+.hero-stat .num{
+  font-family:var(--font-display);
+  font-size:clamp(28px,4vw,42px);
+  font-weight:700;
+  background:var(--grad-1);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.hero-stat .lbl{
+  font-size:13px;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-top:8px;
+  font-weight:500;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Scroll indicator */
+.scroll-ind{
+  position:absolute;
+  bottom:32px;left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  color:var(--text-mute);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  animation:fadeUp 1s ease 1s both;
+}
+.scroll-ind .line{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom,var(--text-mute),transparent);
+  animation:scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%,100%{transform:scaleY(1);opacity:1}
+  50%{transform:scaleY(.5);opacity:.4}
+}
+
+/* ============================================================
+   Section
+   ============================================================ */
+.section{
+  position:relative;
+  z-index:1;
+  padding:100px 32px;
+  max-width:1280px;
+  margin:0 auto;
+}
+.section-head{
+  text-align:center;
+  margin-bottom:64px;
+}
+.section-eyebrow{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--accent);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(32px,5vw,56px);
+  font-weight:700;
+  letter-spacing:-1.5px;
+  line-height:1.1;
+  margin-bottom:16px;
+}
+.section-desc{
+  color:var(--text-dim);
+  font-size:17px;
+  max-width:560px;
+  margin:0 auto;
+}
+
+/* ============================================================
+   Filters / Toolbar
+   ============================================================ */
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:32px;
+  padding:16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  position:sticky;
+  top:80px;
+  z-index:50;
+  backdrop-filter:blur(20px);
+  background:rgba(22,22,31,.85);
+}
+.toolbar-left{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  flex:1;
+  min-width:200px;
+}
+.chip{
+  padding:8px 16px;
+  border-radius:100px;
+  font-size:13px;
+  font-weight:500;
+  color:var(--text-dim);
+  background:transparent;
+  border:1px solid var(--border-2);
+  transition:all .2s;
+  white-space:nowrap;
+}
+.chip:hover{color:var(--text);border-color:var(--text-mute)}
+.chip.active{
+  background:var(--accent);
+  color:var(--bg);
+  border-color:var(--accent);
+  font-weight:600;
+}
+.toolbar-right{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.search-wrap{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+.search-wrap svg{
+  position:absolute;
+  left:12px;
+  width:16px;height:16px;
+  color:var(--text-mute);
+  pointer-events:none;
+}
+.search-input{
+  background:var(--bg-2);
+  border:1px solid var(--border-2);
+  border-radius:100px;
+  padding:9px 16px 9px 36px;
+  font-size:13px;
+  width:220px;
+  transition:all .2s;
+  outline:none;
+}
+.search-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(0,229,160,.1);
+  width:260px;
+}
+.search-input::placeholder{color:var(--text-mute)}
+.sort-select{
+  background:var(--bg-2);
+  border:1px solid var(--border-2);
+  border-radius:100px;
+  padding:9px 16px;
+  font-size:13px;
+  outline:none;
+  cursor:pointer;
+}
+.sort-select:focus{border-color:var(--accent)}
+
+/* ============================================================
+   Hustle Grid
+   ============================================================ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:20px;
+}
+.card{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:24px;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:var(--card-grad,var(--grad-1));
+  opacity:0;
+  transition:opacity .3s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:var(--border-2);
+  box-shadow:var(--shadow-lg);
+  background:var(--surface-2);
+}
+.card:hover::before{opacity:1}
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:16px;
+}
+.card-icon{
+  width:48px;height:48px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  background:var(--card-bg,var(--grad-1));
+  color:var(--bg);
+  flex-shrink:0;
+}
+.card-save{
+  width:34px;height:34px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--text-mute);
+  transition:all .2s;
+  border:1px solid transparent;
+}
+.card-save:hover{
+  background:var(--bg-2);
+  color:var(--accent-4);
+}
+.card-save.saved{
+  color:var(--accent-4);
+  background:rgba(255,214,10,.1);
+  border-color:rgba(255,214,10,.25);
+}
+.card-save svg{width:16px;height:16px}
+.card h3{
+  font-family:var(--font-display);
+  font-size:19px;
+  font-weight:600;
+  margin-bottom:8px;
+  letter-spacing:-.3px;
+  line-height:1.3;
+}
+.card-desc{
+  color:var(--text-dim);
+  font-size:14px;
+  line-height:1.55;
+  margin-bottom:18px;
+  flex:1;
+}
+.card-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.meta-tag{
+  font-size:11px;
+  font-weight:500;
+  padding:4px 10px;
+  border-radius:100px;
+  background:var(--bg-2);
+  color:var(--text-dim);
+  border:1px solid var(--border);
+}
+.card-foot{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+}
+.card-earn{
+  display:flex;
+  flex-direction:column;
+}
+.card-earn .amt{
+  font-family:var(--font-display);
+  font-size:17px;
+  font-weight:700;
+  color:var(--accent);
+}
+.card-earn .per{
+  font-size:11px;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.card-diff{
+  display:flex;
+  gap:3px;
+}
+.card-diff .dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--border-2);
+}
+.card-diff .dot.on{background:var(--accent-4)}
+
+/* Empty state */
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:80px 20px;
+  color:var(--text-mute);
+}
+.empty svg{width:48px;height:48px;margin:0 auto 16px;opacity:.5}
+.empty h3{font-size:18px;color:var(--text-dim);margin-bottom:8px;font-weight:600}
+
+/* ============================================================
+   Stats Bar
+   ============================================================ */
+.stats-bar{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  margin-bottom:64px;
+}
+.stat-cell{
+  background:var(--surface);
+  padding:28px 24px;
+  text-align:center;
+}
+.stat-cell .v{
+  font-family:var(--font-display);
+  font-size:32px;
+  font-weight:700;
+  letter-spacing:-1px;
+  line-height:1;
+  margin-bottom:6px;
+}
+.stat-cell .l{
+  font-size:12px;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-weight:500;
+}
+.stat-cell:nth-child(1) .v{color:var(--accent)}
+.stat-cell:nth-child(2) .v{color:var(--accent-2)}
+.stat-cell:nth-child(3) .v{color:var(--accent-3)}
+.stat-cell:nth-child(4) .v{color:var(--accent-4)}
+
+/* ============================================================
+   Calculator
+   ============================================================ */
+.calc{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  padding:40px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+}
+.calc h3{
+  font-family:var(--font-display);
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:-.5px;
+  margin-bottom:12px;
+}
+.calc p{color:var(--text-dim);font-size:15px;margin-bottom:24px}
+.calc-field{margin-bottom:20px}
+.calc-field label{
+  display:block;
+  font-size:13px;
+  font-weight:500;
+  color:var(--text-dim);
+  margin-bottom:8px;
+}
+.calc-field input[type=range]{
+  width:100%;
+  -webkit-appearance:none;
+  appearance:none;
+  height:6px;
+  border-radius:100px;
+  background:var(--bg-2);
+  outline:none;
+  cursor:pointer;
+}
+.calc-field input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  cursor:pointer;
+  box-shadow:0 0 0 4px rgba(0,229,160,.2);
+  transition:box-shadow .2s;
+}
+.calc-field input[type=range]::-webkit-slider-thumb:hover{
+  box-shadow:0 0 0 6px rgba(0,229,160,.25);
+}
+.calc-field input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  cursor:pointer;
+  border:none;
+}
+.calc-val{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:var(--text-mute);
+  margin-top:6px;
+}
+.calc-val .cur{color:var(--accent);font-weight:600;font-family:var(--font-mono)}
+.calc-result{
+  text-align:center;
+  padding:32px;
+  background:var(--bg-2);
+  border:1px solid var(--border-2);
+  border-radius:var(--r-lg);
+}
+.calc-result .lbl{
+  font-size:12px;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+.calc-result .big{
+  font-family:var(--font-display);
+  font-size:clamp(36px,6vw,56px);
+  font-weight:700;
+  letter-spacing:-2px;
+  line-height:1;
+  background:var(--grad-1);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:8px;
+}
+.calc-result .sub{font-size:14px;color:var(--text-dim)}
+
+/* ============================================================
+   Roadmap / Timeline
+   ============================================================ */
+.roadmap{
+  display:grid;
+  gap:20px;
+  max-width:800px;
+  margin:0 auto;
+}
+.step{
+  display:flex;
+  gap:24px;
+  align-items:flex-start;
+  padding:24px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  transition:all .3s;
+}
+.step:hover{
+  border-color:var(--border-2);
+  transform:translateX(4px);
+}
+.step-num{
+  width:44px;height:44px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:18px;
+  flex-shrink:0;
+  background:var(--grad-1);
+  color:var(--bg);
+}
+.step:nth-child(2) .step-num{background:var(--grad-2)}
+.step:nth-child(3) .step-num{background:var(--grad-3)}
+.step:nth-child(4) .step-num{background:var(--grad-4)}
+.step:nth-child(5) .step-num{background:var(--grad-1)}
+.step-body h4{
+  font-family:var(--font-display);
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:6px;
+  letter-spacing:-.3px;
+}
+.step-body p{color:var(--text-dim);font-size:14px;line-height:1.6}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq{max-width:760px;margin:0 auto}
+.faq-item{
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  margin-bottom:12px;
+  background:var(--surface);
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.faq-item:hover{border-color:var(--border-2)}
+.faq-item.open{border-color:var(--accent)}
+.faq-q{
+  width:100%;
+  padding:20px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  text-align:left;
+  font-size:15px;
+  font-weight:600;
+  color:var(--text);
+}
+.faq-q .icon{
+  width:24px;height:24px;
+  flex-shrink:0;
+  position:relative;
+  transition:transform .3s;
+}
+.faq-q .icon::before,
+.faq-q .icon::after{
+  content:'';
+  position:absolute;
+  background:var(--text-dim);
+  border-radius:2px;
+  transition:all .3s;
+}
+.faq-q .icon::before{
+  top:50%;left:0;
+  width:100%;height:2px;
+  transform:translateY(-50%);
+}
+.faq-q .icon::after{
+  left:50%;top:0;
+  width:2px;height:100%;
+  transform:translateX(-50%);
+}
+.faq-item.open .faq-q .icon::after{transform:translateX(-50%) rotate(90deg);opacity:0}
+.faq-item.open .faq-q .icon{transform:rotate(180deg)}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease,padding .3s ease;
+  padding:0 24px;
+  color:var(--text-dim);
+  font-size:14px;
+  line-height:1.7;
+}
+.faq-item.open .faq-a{
+  max-height:400px;
+  padding:0 24px 24px;
+}
+
+/* ============================================================
+   Modal
+   ============================================================ */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(5,5,10,.8);
+  backdrop-filter:blur(8px);
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{
+  background:var(--surface);
+  border:1px solid var(--border-2);
+  border-radius:var(--r-xl);
+  max-width:640px;
+  width:100%;
+  max-height:88vh;
+  overflow-y:auto;
+  transform:translateY(20px) scale(.98);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{
+  position:absolute;
+  top:20px;right:20px;
+  width:36px;height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg-2);
+  color:var(--text-dim);
+  transition:all .2s;
+  z-index:2;
+}
+.modal-close:hover{background:var(--border-2);color:var(--text)}
+.modal-close svg{width:16px;height:16px}
+.modal-head{
+  padding:40px 40px 24px;
+  border-bottom:1px solid var(--border);
+}
+.modal-head .card-icon{
+  width:56px;height:56px;
+  border-radius:16px;
+  margin-bottom:20px;
+  font-size:26px;
+}
+.modal-head h2{
+  font-family:var(--font-display);
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:-.8px;
+  line-height:1.15;
+  margin-bottom:10px;
+}
+.modal-head p{color:var(--text-dim);font-size:15px}
+.modal-body{padding:32px 40px 40px}
+.modal-body h4{
+  font-family:var(--font-display);
+  font-size:15px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:var(--accent);
+  margin-bottom:14px;
+  margin-top:28px;
+}
+.modal-body h4:first-child{margin-top:0}
+.modal-body ul{list-style:none;padding:0}
+.modal-body li{
+  position:relative;
+  padding-left:24px;
+  margin-bottom:10px;
+  color:var(--text-dim);
+  font-size:14px;
+  line-height:1.6;
+}
+.modal-body li::before{
+  content:'';
+  position:absolute;
+  left:0;top:9px;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--accent);
+  opacity:.6;
+}
+.modal-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:24px 0;
+}
+.modal-stat{
+  padding:16px;
+  background:var(--bg-2);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  text-align:center;
+}
+.modal-stat .v{
+  font-family:var(--font-display);
+  font-size:20px;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:4px;
+}
+.modal-stat .l{
+  font-size:11px;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.modal-actions{
+  display:flex;
+  gap:12px;
+  margin-top:32px;
+}
+.modal-actions .btn{flex:1;justify-content:center}
+
+/* ============================================================
+   Toast
+   ============================================================ */
+.toast-wrap{
+  position:fixed;
+  bottom:24px;right:24px;
+  z-index:300;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  pointer-events:none;
+}
+.toast{
+  background:var(--surface-2);
+  border:1px solid var(--border-2);
+  border-left:3px solid var(--accent);
+  border-radius:var(--r);
+  padding:14px 20px;
+  font-size:14px;
+  color:var(--text);
+  box-shadow:var(--shadow-lg);
+  transform:translateX(120%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  pointer-events:auto;
+  max-width:320px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.toast.show{transform:translateX(0)}
+.toast.error{border-left-color:var(--accent-3)}
+.toast svg{width:18px;height:18px;flex-shrink:0;color:var(--accent)}
+.toast.error svg{color:var(--accent-3)}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer{
+  position:relative;
+  z-index:1;
+  border-top:1px solid var(--border);
+  padding:64px 32px 32px;
+  max-width:1280px;
+  margin:0 auto;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+  margin-bottom:48px;
+}
+.footer-brand .nav-logo{margin-bottom:16px}
+.footer-brand p{
+  color:var(--text-dim);
+  font-size:14px;
+  line-height:1.6;
+  max-width:300px;
+}
+.footer-col h5{
+  font-size:13px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-bottom:20px;
+  color:var(--text);
+}
+.footer-col a{
+  display:block;
+  color:var(--text-dim);
+  font-size:14px;
+  margin-bottom:12px;
+  transition:color .2s;
+}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:32px;
+  border-top:1px solid var(--border);
+  color:var(--text-mute);
+  font-size:13px;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s cubic-bezier(.4,0,.2,1);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media(max-width:900px){
+  .calc{grid-template-columns:1fr;gap:32px;padding:28px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .modal-stats{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav{padding:14px 20px}
+  .nav.scrolled{padding:10px 20px}
+  .nav-links{
+    position:fixed;
+    top:0;right:0;
+    width:280px;height:100vh;
+    background:var(--surface);
+    border-left:1px solid var(--border);
+    flex-direction:column;
+    align-items:flex-start;
+    padding:100px 32px 32px;
+    gap:24px;
+    transform:translateX(100%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+    z-index:1;
+  }
+  .nav-links.open{transform:translateX(0)}
+  .nav-links .nav-link{font-size:18px}
+  .nav-burger{display:flex}
+  .nav-cta{display:none}
+  .hero{padding:100px 20px 60px}
+  .hero-stats{gap:32px}
+  .section{padding:64px 20px}
+  .toolbar{
+    flex-direction:column;
+    align-items:stretch;
+    top:70px;
+  }
+  .toolbar-right{width:100%}
+  .search-wrap{flex:1}
+  .search-input{width:100%}
+  .search-input:focus{width:100%}
+  .grid{grid-template-columns:1fr}
+  .modal-head,.modal-body{padding-left:24px;padding-right:24px}
+  .modal-actions{flex-direction:column}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .toast-wrap{left:16px;right:16px;bottom:16px}
+  .toast{max-width:none}
+}
+@media(max-width:480px){
+  .hero h1{letter-spacing:-2px}
+  .step{flex-direction:column;gap:16px}
+  .stats-bar{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<canvas class="bg-canvas" id="bgCanvas"></canvas>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <span class="dot"></span>
+    HUSTLE<span style="color:var(--accent)">.</span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#hustles" class="nav-link">Hustles</a>
+    <a href="#calculator" class="nav-link">Calculator</a>
+    <a href="#roadmap" class="nav-link">Roadmap</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#hustles" class="nav-cta">Find Your Hustle</a>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      24+ verified side hustles for teens
+    </div>
+    <h1>
+      Make <span class="grad">real money</span><br>
+      before you're <span class="grad-2">18.</span>
+    </h1>
+    <p class="hero-sub">
+      No baby-sitting clichés. No "ask your parents." Real hustles, real numbers,
+      real tools — curated for teens who want to build something.
+    </p>
+    <div class="hero-actions">
+      <a href="#hustles" class="btn btn-primary">
+        Browse Hustles
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#calculator" class="btn btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+        Income Calculator
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num" data-count="24">0</div>
+        <div class="lbl">Hustles</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" data-count="6">0</div>
+        <div class="lbl">Categories</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" data-count="12" data-suffix="k+">0</div>
+        <div class="lbl">Avg Annual</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" data-count="0" data-prefix="$">0</div>
+        <div class="lbl">Startup Cost</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</header>
+
+<!-- Hustles Section -->
+<section class="section" id="hustles">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">// 01 — The Library</div>
+    <h2 class="section-title">Pick your lane.</h2>
+    <p class="section-desc">
+      Every hustle here is filtered for age-appropriateness, startup cost, and actual
+      earning potential. No fluff. Click any card for the full playbook.
+    </p>
+  </div>
+
+  <div class="stats-bar reveal">
+    <div class="stat-cell">
+      <div class="v" id="statTotal">0</div>
+      <div class="l">Hustles Listed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="v" id="statEarning">$0</div>
+      <div class="l">Top Monthly</div>
+    </div>
+    <div class="stat-cell">
+      <div class="v" id="statFree">0</div>
+      <div class="l">Zero Cost Start</div>
+    </div>
+    <div class="stat-cell">
+      <div class="v" id="statFast">0</div>
+      <div class="l">Under 1 Week</div>
+    </div>
+  </div>
+
+  <div class="toolbar reveal" id="toolbar">
+    <div class="toolbar-left" id="categoryChips">
+      <button class="chip active" data-cat="all">All</button>
+      <button class="chip" data-cat="digital">Digital</button>
+      <button class="chip" data-cat="creative">Creative</button>
+      <button class="chip" data-cat="tech">Tech</button>
+      <button class="chip" data-cat="service">Service</button>
+      <button class="chip" data-cat="physical">Physical</button>
+      <button class="chip" data-cat="flip">Flip & Resell</button>
+    </div>
+    <div class="toolbar-right">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search hustles...">
+      </div>
+      <select class="sort-select" id="sortSelect">
+        <option value="default">Sort: Featured</option>
+        <option value="earn-high">Earnings: High → Low</option>
+        <option value="earn-low">Earnings: Low → High</option>
+        <option value="fast">Fastest to Start</option>
+        <option value="easy">Easiest</option>
+        <option value="az">A → Z</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid" id="hustleGrid"></div>
+</section>
+
+<!-- Calculator -->
+<section class="section" id="calculator">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">// 02 — The Numbers</div>
+    <h2 class="section-title">Run the math.</h2>
+    <p class="section-desc">
+      Drag the sliders. See what your side hustle could actually pull in.
+      Realistic estimates, not hype.
+    </p>
+  </div>
+
+  <div class="calc reveal">
+    <div>
+      <h3>Income Calculator</h3>
+      <p>Adjust to match your situation. The output updates live.</p>
+
+      <div class="calc-field">
+        <label>Hours per week</label>
+        <input type="range" id="calcHours" min="1" max="40" value="10" step="1">
+        <div class="calc-val">
+          <span>1 hr</span>
+          <span class="cur" id="calcHoursVal">10 hrs</span>
+          <span>40 hrs</span>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label>Hourly rate ($)</label>
+        <input type="range" id="calcRate" min="5" max="80" value="20" step="1">
+        <div class="calc-val">
+          <span>$5</span>
+          <span class="cur" id="calcRateVal">$20/hr</span>
+          <span>$80</span>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label>Weeks per year active</label>
+        <input type="range" id="calcWeeks" min="4" max="52" value="40" step="1">
+        <div class="calc-val">
+          <span>4 wk</span>
+          <span class="cur" id="calcWeeksVal">40 wks</span>
+          <span>52 wk</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-result">
+      <div class="lbl">Estimated Annual Income</div>
+      <div class="big" id="calcAnnual">$8,000</div>
+      <div class="sub" id="calcBreakdown">$200/wk · $800/mo</div>
+      <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border-2);font-size:13px;color:var(--text-mute);">
+        Based on <span id="calcSummary">10 hrs/wk @ $20/hr for 40 weeks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section class="section" id="roadmap">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">// 03 — The Playbook</div>
+    <h2 class="section-title">Zero to paid.</h2>
+    <p class="section-desc">
+      The universal 5-step sequence that works for almost any hustle on this list.
+    </p>
+  </div>
+
+  <div class="roadmap">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Pick one. Not three.</h4>
+        <p>Scattered effort kills momentum. Choose the hustle that matches your current skills and available hours. Commit for 30 days minimum before judging results.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Build a 3-sample portfolio.</h4>
+        <p>Before you ask anyone for money, make three free things. A logo set. A short edit. A landing page. Samples convert 10x better than promises.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Find your first 3 clients locally.</h4>
+        <p>Your first customers are within 5 miles. Local businesses, family friends, classmates' parents. Face-to-face beats cold DMs when you have no reviews.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Charge more than feels comfortable.</h4>
+        <p>Teens chronically underprice. Double your first instinct. If nobody flinches, you're still too cheap. Raise rates every 5 clients until someone says no.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>Systemize or stagnate.</h4>
+        <p>Once you have 5+ clients, build templates, checklists, and repeatable processes. The hustle becomes a business when it runs without reinventing the wheel each time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">// 04 — The Answers</div>
+    <h2 class="section-title">Real questions.</h2>
+    <p class="section-desc">The stuff people actually ask before they start.</p>
+  </div>
+
+  <div class="faq" id="faqList"></div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <span class="dot"></span>
+        HUSTLE<span style="color:var(--accent)">.</span>
+      </div>
+      <p>
+        Curated side hustles for teens who'd rather build something than wait
+        for a summer job to call back.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <a href="#hustles">All Hustles</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h5>Categories</h5>
+      <a href="#hustles" data-jump="digital">Digital</a>
+      <a href="#hustles" data-jump="creative">Creative</a>
+      <a href="#hustles" data-jump="tech">Tech</a>
+      <a href="#hustles" data-jump="service">Service</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 HUSTLE. Built for the next generation of earners.</div>
+    <div>Made with intent.</div>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-head" id="modalHead"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================================================
+   HUSTLE. — Application
+   ============================================================ */
+
+/* ---------- Data: Hustles ---------- */
+const HUSTLES = [
+  {
+    id: 'freelance-design',
+    title: 'Freelance Graphic Design',
+    category: 'creative',
+    icon: '◆',
+    grad: 'linear-gradient(135deg,#a855f7,#00b8ff)',
+    desc: 'Logos, social posts, thumbnails. Every small business needs them and most hate Canva.',
+    earnLow: 300, earnHigh: 2500, per: 'mo',
+    difficulty: 3, startup: 0, timeToStart: '1-3 days',
+    tags: ['Design', 'Remote', 'Portfolio'],
+    tools: ['Figma (free)', 'Canva Pro', 'Adobe Creative Cloud (student)', 'Behance', 'Dribbble'],
+    steps: [
+      'Build a 3-piece sample portfolio — rebrand a fake café, design 6 social posts, mock a YouTube thumbnail.',
+      'Set up a portfolio site (Carrd, Framer, or GitHub Pages — all free).',
+      'Cold-DM 20 local businesses with a specific redesign idea, not a generic "hire me."',
+      'Charge $50-$150 for your first 3 clients to build reviews. Raise rates after each.',
+      'Move to retainer pricing: $200-$500/mo for ongoing social content.'
+    ],
+    tips: [
+      'Niche down — "logos for barbershops" beats "graphic designer."',
+      'Use Figma community files as learning tools, not as deliverables.',
+      'Deliver 2 concepts, not 10. More options = more indecision = slower payment.'
+    ],
+    risks: 'Scope creep. Always define revision limits in writing before starting.',
+    ageNote: 'No age restriction. Under 18 may need a parent to set up PayPal/Stripe.',
+    example: 'A 16-year-old in Ohio built a TikTok showing logo redesigns of local businesses. 40k followers later, he charges $800/logo.'
+  },
+  {
+    id: 'video-editing',
+    title: 'Video Editing for Creators',
+    category: 'creative',
+    icon: '▶',
+    grad: 'linear-gradient(135deg,#ff2e88,#ffd60a)',
+    desc: 'YouTubers and TikTokers outsource editing constantly. Short-form is the gold rush.',
+    earnLow: 400, earnHigh: 4000, per: 'mo',
+    difficulty: 3, startup: 0, timeToStart: '1 week',
+    tags: ['Video', 'Remote', 'Recurring'],
+    tools: ['DaVinci Resolve (free)', 'CapCut', 'Premiere Pro', 'Descript', 'Frame.io'],
+    steps: [
+      'Learn DaVinci Resolve (free, industry-grade). 20 hours of tutorials gets you competent.',
+      'Re-edit 3 popular YouTube videos as portfolio pieces — same footage, your cut.',
+      'DM 30 small creators (10k-100k subs) with a free 60-second sample edit of their own content.',
+      'Charge $30-$75 per short-form video, $150-$400 per long-form.',
+      'Bundle: 20 shorts/mo for $600-$1200 retainer.'
+    ],
+    tips: [
+      'Short-form (TikTok/Reels/Shorts) pays faster and has more demand than long-form.',
+      'Turnaround time is your selling point. Same-day edits command premium rates.',
+      'Build a Loom walkthrough of your process — creators love transparency.'
+    ],
+    risks: 'Revision hell. Cap revisions at 2 in your contract.',
+    ageNote: 'No restriction. Payment via PayPal, Wise, or direct bank with parent.',
+    example: 'A 17-year-old edits for 4 podcasters. 15 hrs/week. $2,400/mo.'
+  },
+  {
+    id: 'reselling',
+    title: 'Flip & Resell',
+    category: 'flip',
+    icon: '⇄',
+    grad: 'linear-gradient(135deg,#00e5a0,#00b8ff)',
+    desc: 'Buy low at thrift stores, garage sales, and Facebook Marketplace. Sell high on eBay, Depop, Mercari.',
+    earnLow: 200, earnHigh: 3000, per: 'mo',
+    difficulty: 2, startup: 20, timeToStart: '1 day',
+    tags: ['Physical', 'Scalable', 'No Skill Floor'],
+    tools: ['eBay app', 'Mercari', 'Depop', 'Facebook Marketplace', 'Google Lens'],
+    steps: [
+      'Pick a niche: sneakers, vintage tees, video games, books, electronics, or furniture.',
+      'Spend $20 at 3 thrift stores. Use Google Lens to check comps on every item.',
+      'List on 2 platforms simultaneously (eBay + Mercari). Cross-list with Vendoo or manually.',
+      'Reinvest 100% of profit for the first 90 days. Your inventory is your engine.',
+      'Scale to sourcing from estate sales, storage auctions, and liquidation pallets.'
+    ],
+    tips: [
+      'Sold comps on eBay > asking prices. Only trust what actually sold.',
+      'Photograph on white background with natural light. Clean listings sell 3x faster.',
+      'Bundle low-value items into lots to move dead inventory.'
+    ],
+    risks: 'Dead inventory. If it hasnt sold in 60 days, cut the price 40%.',
+    ageNote: 'eBay requires 18+. Use a parent account. Mercari allows 18+. Depop is 13+ with parent consent.',
+    example: 'A 15-year-old in Texas flips vintage tees. $50 startup. $1,800/mo by month 8.'
+  },
+  {
+    id: 'tutoring',
+    title: 'Peer Tutoring',
+    category: 'service',
+    icon: '∑',
+    grad: 'linear-gradient(135deg,#ffd60a,#ff2e88)',
+    desc: 'You already know the material. Sell that knowledge to the kids one grade below you.',
+    earnLow: 300, earnHigh: 1500, per: 'mo',
+    difficulty: 1, startup: 0, timeToStart: '1 day',
+    tags: ['Local', 'In-Person', 'Referral-Based'],
+    tools: ['Zoom', 'Google Meet', 'Notability', 'Khan Academy', 'Quizlet'],
+    steps: [
+      'Pick 2 subjects you scored A or B+ in. Math and science pay best.',
+      'Tell 10 parents you tutor. Word-of-mouth is the whole engine.',
+      'Charge $20-$40/hr in-person, $15-$30/hr online.',
+      'Run 45-min sessions with 15-min prep. Track progress in a shared doc.',
+      'Raise rates after 5 happy clients. Referral discount: 1 free session per referral.'
+    ],
+    tips: [
+      'Test prep (SAT/ACT) pays 2x standard tutoring. Learn the format, charge $50+/hr.',
+      'Group sessions: 3 students at $15/hr = $45/hr effective rate.',
+      'Parents pay for confidence, not just grades. Sell the outcome.'
+    ],
+    risks: 'Flaky clients. Take payment upfront for the first 3 sessions.',
+    ageNote: 'No restriction. In-person tutoring may require parent transport.',
+    example: 'A 16-year-old tutors SAT math at $50/hr. 6 hrs/week. $1,200/mo.'
+  },
+  {
+    id: 'social-media',
+    title: 'Social Media Management',
+    category: 'digital',
+    icon: '@',
+    grad: 'linear-gradient(135deg,#00b8ff,#a855f7)',
+    desc: 'Local businesses know they need to be on Instagram. They dont know how. You do.',
+    earnLow: 500, earnHigh: 3000, per: 'mo',
+    difficulty: 3, startup: 0, timeToStart: '1 week',
+    tags: ['Remote', 'Recurring', 'Client-Facing'],
+    tools: ['Buffer', 'Later', 'CapCut', 'Canva', 'ChatGPT', 'Notion'],
+    steps: [
+      'Grow your own account first. Even 500 engaged followers is proof of concept.',
+      'Target 3 local business types: gyms, cafés, salons. Pick one.',
+      'Offer a free 2-week trial: 3 posts/week, 1 reel/week, full analytics report.',
+      'After trial, pitch $400-$800/mo retainer for full management.',
+      'Scale to 4-5 clients max solo, then hire subcontractors.'
+    ],
+    tips: [
+      'Reels > static posts. 80% of your content should be short-form video.',
+      'Show results in screenshots. "We grew reach 340% in 30 days" closes deals.',
+      'Batch content on Sundays. Post daily via scheduler. 1 hour/day max.'
+    ],
+    risks: 'Client dependency. Never let one client be >40% of your income.',
+    ageNote: 'No restriction. Business owners care about results, not your age.',
+    example: 'A 17-year-old runs social for 3 local businesses. $1,800/mo. 12 hrs/week.'
+  },
+  {
+    id: 'web-dev',
+    title: 'Freelance Web Development',
+    category: 'tech',
+    icon: '</>',
+    grad: 'linear-gradient(135deg,#00e5a0,#a855f7)',
+    desc: 'Every business needs a site. Most are ugly. Learn HTML/CSS/JS and charge to fix that.',
+    earnLow: 500, earnHigh: 5000, per: 'mo',
+    difficulty: 4, startup: 0, timeToStart: '4-8 weeks',
+    tags: ['Tech', 'Remote', 'High Ceiling'],
+    tools: ['VS Code', 'GitHub', 'Netlify', 'Vercel', 'Figma', 'Tailwind CSS'],
+    steps: [
+      'Learn HTML, CSS, JavaScript. FreeCodeCamp or The Odin Project. 8 weeks of daily work.',
+      'Build 3 real sites: a restaurant, a portfolio, a landing page. Deploy all to Vercel.',
+      'Cold-email 50 local businesses with a specific critique of their current site.',
+      'Charge $500-$1500 per site. 50% upfront, 50% on launch.',
+      'Upsell: $50-$150/mo maintenance retainer.'
+    ],
+    tips: [
+      'WordPress pays faster than custom code. Learn both.',
+      'Webflow lets you charge agency rates without deep coding.',
+      'Speed and mobile responsiveness are your two selling points. Test both.'
+    ],
+    risks: 'Scope creep and revision loops. Fixed-price with clear deliverable list.',
+    ageNote: 'No restriction. Stripe requires 18+, use parent or PayPal.',
+    example: 'A 17-year-old builds WordPress sites for dentists. $1,200/site. 3/mo.'
+  },
+  {
+    id: 'etsy-print',
+    title: 'Print-on-Demand Store',
+    category: 'digital',
+    icon: '☼',
+    grad: 'linear-gradient(135deg,#ff2e88,#a855f7)',
+    desc: 'Design once, sell forever. Printful/Printify handle printing and shipping.',
+    earnLow: 100, earnHigh: 2000, per: 'mo',
+    difficulty: 2, startup: 0, timeToStart: '2-3 days',
+    tags: ['Passive', 'Design', 'E-Commerce'],
+    tools: ['Printify', 'Printful', 'Etsy', 'Canva', 'Placeit'],
+    steps: [
+      'Pick a niche with identity: nurses, gamers, cat moms, teachers, plant people.',
+      'Design 10-20 simple text-based designs. Sarcasm and inside jokes sell best.',
+      'Set up Printify + Etsy. List all designs on tees, mugs, and stickers.',
+      'Price at 2.5x base cost. Etsy fees eat ~10%.',
+      'Run Etsy Ads at $1-$3/day on your best 3 designs only.'
+    ],
+    tips: [
+      'Trend research: Etsy search bar autocomplete is free market data.',
+      'Stickers have the highest margin and lowest price barrier.',
+      'Mockups matter more than designs. Invest in good product photos.'
+    ],
+    risks: 'Copyright strikes. Never use trademarked phrases or celebrity likenesses.',
+    ageNote: 'Etsy requires 18+. Parent account needed.',
+    example: 'A 16-year-old sells nurse-themed mugs. 200 sales/mo. $1,400 profit.'
+  },
+  {
+    id: 'dog-walking',
+    title: 'Dog Walking & Pet Sitting',
+    category: 'service',
+    icon: '❋',
+    grad: 'linear-gradient(135deg,#00e5a0,#ffd60a)',
+    desc: 'Low skill floor, high demand, recurring revenue. The classic for a reason.',
+    earnLow: 200, earnHigh: 1200, per: 'mo',
+    difficulty: 1, startup: 0, timeToStart: '1 day',
+    tags: ['Local', 'Recurring', 'Physical'],
+    tools: ['Rover (18+)', 'Wag', 'Nextdoor', 'Google Maps', 'Venmo'],
+    steps: [
+      'Tell every neighbor with a dog you walk. Free first walk to prove reliability.',
+      'Charge $15-$25 per 30-min walk, $30-$50 per overnight sit.',
+      'Build a route of 4-6 dogs in your neighborhood. Walk them in pairs.',
+      'Get a Google Business Profile. Ask every client for a review.',
+      'Add services: feeding, medication, vet transport. Each adds $10-$20.'
+    ],
+    tips: [
+      'Reliability > price. Never cancel. Never be late.',
+      'Holidays and weekends: 1.5-2x rates. Book early.',
+      'Get pet first-aid certified (Red Cross, free online).'
+    ],
+    risks: 'Injury or lost pet. Always keep owner contact info and vet info on hand.',
+    ageNote: 'Rover requires 18+. Under 18: go direct with neighbors.',
+    example: 'A 14-year-old walks 6 dogs/day after school. $900/mo.'
+  },
+  {
+    id: 'youtube',
+    title: 'YouTube / Content Creation',
+    category: 'digital',
+    icon: '▶',
+    grad: 'linear-gradient(135deg,#ff2e88,#ffd60a)',
+    desc: 'Slow burn, huge ceiling. Ad revenue, sponsorships, merch, affiliates.',
+    earnLow: 0, earnHigh: 10000, per: 'mo',
+    difficulty: 5, startup: 0, timeToStart: '6-12 months',
+    tags: ['Long Game', 'Creative', 'Scalable'],
+    tools: ['CapCut', 'DaVinci Resolve', 'OBS', 'Canva', 'TubeBuddy'],
+    steps: [
+      'Pick a niche you can post about 2x/week for 2 years without burning out.',
+      'Study 10 top creators in your niche. Note their hooks, thumbnails, pacing.',
+      'Post 50 videos before judging results. The first 20 will be bad. That is normal.',
+      'Monetize at 1k subs + 4k watch hours: ads, then affiliates, then sponsors.',
+      'Reinvest earnings into better gear and editing help.'
+    ],
+    tips: [
+      'Thumbnail + title = 90% of the outcome. Spend 2 hours on each.',
+      'First 30 seconds decide everything. Hook or lose.',
+      'Shorts for reach, long-form for revenue. Run both.'
+    ],
+    risks: 'Burnout and slow growth. Treat it as a 2-year project.',
+    ageNote: 'YouTube requires 13+ with parent channel. AdSense requires 18+.',
+    example: 'A 15-year-old gaming channel hit 100k subs in 14 months. $3k/mo from ads + sponsors.'
+  },
+  {
+    id: 'cleaning',
+    title: 'Neighborhood Cleaning Service',
+    category: 'service',
+    icon: '✦',
+    grad: 'linear-gradient(135deg,#00b8ff,#00e5a0)',
+    desc: 'Pressure washing, window cleaning, gutter clearing, car detailing. High ticket, low competition.',
+    earnLow: 300, earnHigh: 2500, per: 'mo',
+    difficulty: 2, startup: 50, timeToStart: '3 days',
+    tags: ['Local', 'Physical', 'High-Ticket'],
+    tools: ['Pressure washer', 'Squeegee', 'Microfiber cloths', 'Bucket', 'Dawn dish soap'],
+    steps: [
+      'Pick one service: driveway pressure washing, window cleaning, or car detailing.',
+      'Price by job: $80-$200 driveway, $60-$150 windows, $50-$150 car detail.',
+      'Post before/after photos on Nextdoor and local Facebook groups.',
+      'Book 3 jobs/week. Saturdays are the money day.',
+      'Upsell: monthly maintenance, bundle window + gutter.'
+    ],
+    tips: [
+      'Before/after photos are your entire marketing. Take them every job.',
+      'Door-knock the houses adjacent to every job you finish.',
+      'Referral bonus: $20 off next clean for every neighbor referred.'
+    ],
+    risks: 'Property damage. Get parent supervision for pressure washing.',
+    ageNote: 'No restriction. May need parent for equipment purchase and transport.',
+    example: 'A 16-year-old pressure washes driveways. 4 jobs/weekend. $800/mo.'
+  },
+  {
+    id: 'discord-bots',
+    title: 'Discord Bot Development',
+    category: 'tech',
+    icon: '⌘',
+    grad: 'linear-gradient(135deg,#a855f7,#00b8ff)',
+    desc: 'Every growing Discord server needs custom bots. Moderation, games, economy, alerts.',
+    earnLow: 200, earnHigh: 2000, per: 'mo',
+    difficulty: 4, startup: 0, timeToStart: '2-4 weeks',
+    tags: ['Tech', 'Community', 'Recurring'],
+    tools: ['discord.js', 'discord.py', 'Node.js', 'Python', 'Railway', 'Replit'],
+    steps: [
+      'Learn discord.js or discord.py. Build 3 bots for your own servers first.',
+      'Join 20 large servers. Offer free bot hosting for 2 weeks in exchange for a testimonial.',
+      'Charge $50-$300 per bot build, $20-$80/mo for hosting + updates.',
+      'Specialize: economy bots, ticket bots, moderation bots, or music bots.',
+      'Build a template system so each new client takes 2 hours instead of 20.'
+    ],
+    tips: [
+      'Reliability is everything. Uptime > features.',
+      'Offer a free tier to small servers for portfolio and word-of-mouth.',
+      'Use Railway or Fly.io for cheap hosting ($5/mo per bot).'
+    ],
+    risks: 'API changes break bots. Budget time for maintenance.',
+    ageNote: 'No restriction. Discord allows 13+. Stripe requires 18+.',
+    example: 'A 17-year-old runs 12 bots for servers. $600/mo recurring hosting.'
+  },
+  {
+    id: 'audio',
+    title: 'Voiceover & Audio Work',
+    category: 'creative',
+    icon: '♫',
+    grad: 'linear-gradient(135deg,#ffd60a,#ff2e88)',
+    desc: 'YouTubers, audiobook producers, and ad agencies pay for clean voice work and audio cleanup.',
+    earnLow: 200, earnHigh: 2000, per: 'mo',
+    difficulty: 2, startup: 40, timeToStart: '1 week',
+    tags: ['Creative', 'Remote', 'Audio'],
+    tools: ['Audacity (free)', 'Reaper', 'Blue Yeti', 'Fiverr', 'Voices.com'],
+    steps: [
+      'Record 5 demo samples: commercial read, narration, character, explainer, audiobook.',
+      'Treat your space: closet with blankets is better than an untreated room.',
+      'List on Fiverr at $10-$25 per 100 words to build reviews.',
+      'Raise to $50-$150 per project after 20 five-star reviews.',
+      'Pitch indie audiobook authors directly on Reddit and Discord.'
+    ],
+    tips: [
+      'Noise floor < -60dB. Learn noise reduction in Audacity.',
+      'Deliver WAV + MP3. Clients love options.',
+      'Turnaround under 24 hours commands 2x rates.'
+    ],
+    risks: 'Client revisions on tone. Ask for reference samples upfront.',
+    ageNote: 'Fiverr requires 13+ with parent. Voices.com requires 18+.',
+    example: 'A 16-year-old voices indie game characters. $1,200/mo. 8 hrs/week.'
+  },
+  {
+    id: 'lemonade-stand-upgrade',
+    title: 'Event Concessions & Vending',
+    category: 'physical',
+    icon: '☕',
+    grad: 'linear-gradient(135deg,#ffd60a,#00e5a0)',
+    desc: 'Lemonade stands, but 10x. Farmers markets, festivals, concerts, school events.',
+    earnLow: 300, earnHigh: 3000, per: 'mo',
+    difficulty: 3, startup: 100, timeToStart: '1-2 weeks',
+    tags: ['Physical', 'Events', 'Seasonal'],
+    tools: ['Folding table', 'Cooler', 'Signage', 'Square Reader', 'Cash box'],
+    steps: [
+      'Pick a product: lemonade, iced coffee, boba, cotton candy, popcorn, or churros.',
+      'Get a booth at a local farmers market or school event. Start small.',
+      'Price for volume: $3-$6 per item. High traffic > high margin.',
+      'Track every sale. Note what sells out and when.',
+      'Scale to 2-3 events/week. Hire a friend for $15/hr at larger events.'
+    ],
+    tips: [
+      'Location is 80% of revenue. Festivals > sidewalks.',
+      'Instagram-worthy cups and signage double sales.',
+      'Cash + Square reader. Never lose a sale to "no cash."'
+    ],
+    risks: 'Food permits and weather. Check local rules. Have a rain plan.',
+    ageNote: 'Permits usually require adult. Work with a parent as the vendor.',
+    example: 'A 15-year-old runs a boba stand at farmers markets. $2,000/mo in summer.'
+  },
+  {
+    id: 'coding-tutor',
+    title: 'Teach Kids to Code',
+    category: 'tech',
+    icon: '{ }',
+    grad: 'linear-gradient(135deg,#00e5a0,#00b8ff)',
+    desc: 'Parents pay well for STEM enrichment. You teach Scratch, Python, or web basics.',
+    earnLow: 400, earnHigh: 2000, per: 'mo',
+    difficulty: 2, startup: 0, timeToStart: '1 week',
+    tags: ['Tech', 'Teaching', 'Recurring'],
+    tools: ['Scratch', 'Code.org', 'Replit', 'Zoom', 'Google Slides'],
+    steps: [
+      'Pick an age range: 8-11 (Scratch) or 12-15 (Python/web).',
+      'Build a 4-week curriculum. One 45-min session per week. Slides + project.',
+      'Offer first session free. Parents judge on how engaged the kid is.',
+      'Charge $30-$60/hr. Group of 3 kids: $20/hr each = $60/hr effective.',
+      'Run summer camps: 5 days, 2 hrs/day, $200-$400 per kid.'
+    ],
+    tips: [
+      'Show parents a "demo day" where the kid presents their project.',
+      'Game-based projects keep kids engaged: make a Pong clone by week 4.',
+      'Partner with local libraries or community centers for space.'
+    ],
+    risks: 'Kid disengagement. Always have a backup game/activity ready.',
+    ageNote: 'No restriction. Parents will want to meet you and see a plan.',
+    example: 'A 17-year-old teaches Python to 4 kids. $800/mo. 4 hrs/week.'
+  },
+  {
+    id: 'stock-photo',
+    title: 'Stock Photography & Video',
+    category: 'creative',
+    icon: '◉',
+    grad: 'linear-gradient(135deg,#00b8ff,#ff2e88)',
+    desc: 'Upload once, earn forever. Shutterstock, Adobe Stock, Pond5 pay per download.',
+    earnLow: 50, earnHigh: 800, per: 'mo',
+    difficulty: 2, startup: 0, timeToStart: '1-2 weeks',
+    tags: ['Passive', 'Creative', 'Long Tail'],
+    tools: ['Smartphone camera', 'Lightroom Mobile', 'Shutterstock', 'Adobe Stock', 'Pond5'],
+    steps: [
+      'Pick a niche: local landmarks, food flat-lays, tech, or nature.',
+      'Upload 100 photos/videos. Expect ~10% to be accepted.',
+      'Tag aggressively. 30-50 relevant keywords per asset.',
+      'Upload weekly. Volume is the game.',
+      'Best sellers: business, food, tech, and lifestyle. Not landscapes.'
+    ],
+    tips: [
+      'Video clips pay 3-5x more per download than photos.',
+      'Editorial content (events, protests, local news) has less competition.',
+      'Avoid logos, brands, and recognizable faces without model releases.'
+    ],
+    risks: 'Rejection rate is high at first. Learn from every rejection.',
+    ageNote: 'Shutterstock allows 18+. Adobe Stock allows 18+. Parent account needed.',
+    example: 'A 16-year-old uploads drone footage of local beaches. $300/mo passive after 6 months.'
+  },
+  {
+    id: 'nft-digital-art',
+    title: 'Digital Art Commissions',
+    category: 'creative',
+    icon: '✎',
+    grad: 'linear-gradient(135deg,#a855f7,#ff2e88)',
+    desc: 'OCs, avatars, stickers, emotes. Artists on Twitter and Discord pay real money.',
+    earnLow: 200, earnHigh: 3000, per: 'mo',
+    difficulty: 3, startup: 0, timeToStart: '2-4 weeks',
+    tags: ['Creative', 'Community', 'Skill-Based'],
+    tools: ['Procreate', 'Clip Studio Paint', 'Krita (free)', 'Twitter', 'Discord'],
+    steps: [
+      'Pick a style: anime, semi-realistic, chibi, pixel, or cartoon.',
+      'Post daily on Twitter/X and Instagram. Use relevant hashtags.',
+      'Open 3 "commission slots" at low prices ($15-$40) to build reviews.',
+      'Raise prices after every 5 commissions. $80-$200 per piece is achievable.',
+      'Build a Discord server for your buyers. Post-exclusives drive repeat orders.'
+    ],
+    tips: [
+      'Speed is your advantage. Simple styles = faster turnaround = more revenue.',
+      'Use a commission sheet: prices, terms, examples in one image.',
+      'Take 50% upfront, 50% on delivery. Always.'
+    ],
+    risks: 'Art theft and chargebacks. Watermark previews until payment clears.',
+    ageNote: 'PayPal requires 18+. Use a parent or Ko-fi with parent account.',
+    example: 'A 15-year-old does anime emotes for streamers. $2,000/mo after 6 months.'
+  },
+  {
+    id: 'app-dev',
+    title: 'Build & Sell Simple Apps',
+    category: 'tech',
+    icon: '◐',
+    grad: 'linear-gradient(135deg,#00e5a0,#ffd60a)',
+    desc: 'Solve one small problem. Charge $1.99. Repeat 10,000 times.',
+    earnLow: 100, earnHigh: 5000, per: 'mo',
+    difficulty: 5, startup: 100, timeToStart: '2-3 months',
+    tags: ['Tech', 'Passive', 'Long Game'],
+    tools: ['Flutter', 'React Native', 'SwiftUI', 'Firebase', 'RevenueCat'],
+    steps: [
+      'Pick a tiny problem: habit tracker, tip calculator, unit converter, soundboard.',
+      'Build MVP in 4 weeks. Ugly is fine. Working is required.',
+      'Ship on iOS + Android. Use RevenueCat for subscriptions.',
+      'Run ASO: keyword-optimized title, screenshots, description.',
+      'Iterate based on reviews. One 5-star fix per week.'
+    ],
+    tips: [
+      'Niche utility apps beat generic ones. "Tip calculator for servers" > "calculator."',
+      'In-app purchase + ads = double monetization.',
+      'Update weekly for 6 months. App Store rewards consistency.'
+    ],
+    risks: 'Discovery is hard. 90% of apps make < $100/mo. Build 3, expect 1 to work.',
+    ageNote: 'Apple/Google dev accounts require 18+. Parent account needed.',
+    example: 'A 17-year-old built a plant-watering reminder app. $800/mo from subscriptions.'
+  },
+  {
+    id: 'sneaker-flip',
+    title: 'Sneaker Flipping',
+    category: 'flip',
+    icon: '⇪',
+    grad: 'linear-gradient(135deg,#ff2e88,#00b8ff)',
+    desc: 'Buy at retail, sell at resale. High risk, high reward, real margins.',
+    earnLow: 200, earnHigh: 5000, per: 'mo',
+    difficulty: 4, startup: 200, timeToStart: '1-2 weeks',
+    tags: ['Physical', 'Hype', 'Capital Required'],
+    tools: ['StockX', 'GOAT', 'eBay', 'Nike SNKRS', 'Discord monitors'],
+    steps: [
+      'Learn the market: Jordan 1s, Dunks, Yeezys, New Balance collabs.',
+      'Enter raffles on SNKRS, Confirmed, and boutique sites. Free to enter.',
+      'Buy at retail ($150-$250), sell at resale ($250-$800+).',
+      'Use StockX/GOAT for price data. Never guess the market.',
+      'Reinvest 100% for 6 months to build capital.'
+    ],
+    tips: [
+      'Only buy pairs with proven resale history. No "I think this will pop."',
+      'Local meetups = no fees, no shipping risk. Use police station parking lots.',
+      'Raffle bots exist but are risky and against most sites TOS.'
+    ],
+    risks: 'Market crashes. Hype dies. Never hold more than 30 days.',
+    ageNote: 'StockX/GOAT require 18+. Parent account needed.',
+    example: 'A 17-year-old hit 3 raffle wins in one month. $1,200 profit.'
+  },
+  {
+    id: 'car-detailing',
+    title: 'Mobile Car Detailing',
+    category: 'service',
+    icon: '◈',
+    grad: 'linear-gradient(135deg,#00b8ff,#00e5a0)',
+    desc: 'Show up to driveways. Clean cars. Charge $50-$200 per vehicle.',
+    earnLow: 400, earnHigh: 3000, per: 'mo',
+    difficulty: 2, startup: 80, timeToStart: '1 week',
+    tags: ['Local', 'Physical', 'High-Ticket'],
+    tools: ['Vacuum', 'Microfiber towels', 'Car soap', 'Wax', 'Tire shine', 'Bucket'],
+    steps: [
+      'Practice on family cars. Time yourself. Aim for 90 min per full detail.',
+      'Price: $50 basic wash, $120 full interior + exterior, $200+ for SUVs/trucks.',
+      'Post on Nextdoor and local Facebook groups. Before/after photos.',
+      'Book 3 cars per weekend. $300-$500/weekend.',
+      'Upsell: monthly maintenance at $80/mo per car.'
+    ],
+    tips: [
+      'Mobile = you go to them. That convenience is worth $20-$40 extra.',
+      'Get a waterless wash system for apartment complexes.',
+      'Bundle: 5-car neighborhood deal at 20% off.'
+    ],
+    risks: 'Scratching paint. Practice on your own car first. Use quality towels.',
+    ageNote: 'Driving requires license. Parent transport helps until then.',
+    example: 'A 17-year-old details 4 cars/weekend. $600/weekend.'
+  },
+  {
+    id: 'newsletter',
+    title: 'Niche Newsletter',
+    category: 'digital',
+    icon: '✉',
+    grad: 'linear-gradient(135deg,#ffd60a,#a855f7)',
+    desc: 'Curate one topic. Grow an email list. Monetize with sponsors and paid tiers.',
+    earnLow: 0, earnHigh: 4000, per: 'mo',
+    difficulty: 4, startup: 0, timeToStart: '1-2 months',
+    tags: ['Writing', 'Passive', 'Scalable'],
+    tools: ['Substack', 'beehiiv', 'ConvertKit', 'Twitter', 'Reddit'],
+    steps: [
+      'Pick a niche you read about daily: sneakers, AI tools, local events, indie games.',
+      'Write 20 issues before promoting. Build the habit first.',
+      'Post daily on Twitter/X and Reddit linking to your best issues.',
+      'Monetize: sponsors ($50-$500/issue), paid tier ($5-$15/mo).',
+      'At 1,000 subscribers, you have a real business.'
+    ],
+    tips: [
+      'One niche, one voice, one weekly send. Consistency wins.',
+      'Cross-promote with similar newsletters. Free growth.',
+      'Sponsors pay per subscriber. 5,000 engaged subs = $500/issue.'
+    ],
+    risks: 'Slow growth. Expect 12 months before meaningful revenue.',
+    ageNote: 'Substack requires 18+. beehiiv requires 18+. Parent account needed.',
+    example: 'A 17-year-old writes an AI tools newsletter. 4,000 subs. $800/mo from sponsors.'
+  },
+  {
+    id: '3d-printing',
+    title: '3D Printing & Selling',
+    category: 'physical',
+    icon: '◈',
+    grad: 'linear-gradient(135deg,#00e5a0,#ff2e88)',
+    desc: 'Design or download models. Print. Sell on Etsy, eBay, or locally.',
+    earnLow: 100, earnHigh: 1500, per: 'mo',
+    difficulty: 3, startup: 200, timeToStart: '2-4 weeks',
+    tags: ['Physical', 'Niche', 'Scalable'],
+    tools: ['Ender 3', 'Prusa Mini', 'TinkerCAD', 'Fusion 360', 'Etsy'],
+    steps: [
+      'Buy an Ender 3 ($150-$200) or use a school/makerspace printer.',
+      'Learn basic modeling in TinkerCAD. 5 hours gets you competent.',
+      'Find gaps: phone stands, headphone hooks, plant pots, fidget toys.',
+      'List on Etsy. Price at 3-4x material cost.',
+      'Niche down: "3D printed dice towers for D&D" beats "3D printed stuff."'
+    ],
+    tips: [
+      'Functional prints sell better than decorative ones.',
+      'Post print videos on TikTok. ASMR printing content goes viral.',
+      'Custom orders: charge 2x for personalized names/colors.'
+    ],
+    risks: 'Printer maintenance and failed prints. Budget 20% waste.',
+    ageNote: 'No restriction. Parent for purchase and Etsy account.',
+    example: 'A 15-year-old prints fidget toys. $600/mo. 10 hrs/week.'
+  },
+  {
+    id: 'affiliate',
+    title: 'Affiliate Marketing',
+    category: 'digital',
+    icon: '⤴',
+    grad: 'linear-gradient(135deg,#ff2e88,#ffd60a)',
+    desc: 'Recommend products you actually use. Earn commission on every sale.',
+    earnLow: 0, earnHigh: 3000, per: 'mo',
+    difficulty: 4, startup: 0, timeToStart: '2-6 months',
+    tags: ['Passive', 'Content', 'Long Game'],
+    tools: ['Amazon Associates', 'Impact', 'ShareASale', 'YouTube', 'TikTok'],
+    steps: [
+      'Pick a category: tech, gaming, beauty, fitness, or study tools.',
+      'Create content: YouTube reviews, TikTok hauls, blog posts, or newsletters.',
+      'Apply to affiliate programs. Amazon Associates is easiest to start.',
+      'Link every recommendation with your affiliate tag.',
+      'Focus on "best X for Y" content — highest buying intent.'
+    ],
+    tips: [
+      'Only promote products you actually use. Trust converts.',
+      'YouTube descriptions and pinned comments drive the most clicks.',
+      'Diversify: Amazon + 2-3 other programs. Never one source.'
+    ],
+    risks: 'Amazon closes accounts for low conversion. Drive quality traffic.',
+    ageNote: 'Amazon Associates requires 18+. Parent account needed.',
+    example: 'A 17-year-old reviews budget gaming mice. $500/mo from Amazon links.'
+  },
+  {
+    id: 'photography',
+    title: 'Event & Portrait Photography',
+    category: 'creative',
+    icon: '◉',
+    grad: 'linear-gradient(135deg,#00b8ff,#a855f7)',
+    desc: 'Birthday parties, senior portraits, family shoots. One camera, real money.',
+    earnLow: 300, earnHigh: 2500, per: 'mo',
+    difficulty: 3, startup: 100, timeToStart: '2-4 weeks',
+    tags: ['Creative', 'Local', 'High-Ticket'],
+    tools: ['DSLR/Mirrorless', 'Lightroom', 'Canva', 'Instagram', 'Pixieset'],
+    steps: [
+      'Learn manual mode. Shoot 1,000 photos before charging anyone.',
+      'Do 5 free shoots for friends to build a portfolio.',
+      'Charge $75-$150 for mini sessions, $200-$500 for events.',
+      'Post on Instagram and local Facebook groups. Before/after edits.',
+      'Upsell: prints, albums, and second-shooter packages.'
+    ],
+    tips: [
+      'Golden hour (1 hr before sunset) makes any photo look professional.',
+      'Deliver a sneak peek within 24 hours. Clients love speed.',
+      'Mini-session days: 6 clients x $100 = $600 in one afternoon.'
+    ],
+    risks: 'Equipment damage or loss. Insure if you can.',
+    ageNote: 'No restriction. Parent transport for events.',
+    example: 'A 16-year-old shoots senior portraits. $1,200/mo in fall season.'
+  },
+  {
+    id: 'tiktok-shop',
+    title: 'TikTok Shop & UGC',
+    category: 'digital',
+    icon: '♪',
+    grad: 'linear-gradient(135deg,#ff2e88,#a855f7)',
+    desc: 'Brands pay for authentic short-form videos. No followers required to start.',
+    earnLow: 200, earnHigh: 3000, per: 'mo',
+    difficulty: 2, startup: 0, timeToStart: '1-2 weeks',
+    tags: ['Content', 'Brands', 'Fast Start'],
+    tools: ['TikTok', 'CapCut', 'Aspire', 'Billo', 'Insense'],
+    steps: [
+      'Create 5 UGC-style videos for products you own. Phone camera is fine.',
+      'Join UGC platforms: Billo, Aspire, Insense, or TikTok Creator Marketplace.',
+      'Charge $50-$150 per video starting out. Raise to $200-$500 with reviews.',
+      'Niche down: beauty, tech, fitness, or home goods.',
+      'Build a portfolio page (Notion or Carrd) with your best 10 videos.'
+    ],
+    tips: [
+      'Hook in first 2 seconds. Show the product in action immediately.',
+      'Natural lighting + clean background = professional look.',
+      'Brands want authenticity, not polish. Talk like a real person.'
+    ],
+    risks: 'Payment delays. Use platform escrow or 50% upfront.',
+    ageNote: 'TikTok requires 13+. Payment platforms require 18+. Parent account needed.',
+    example: 'A 16-year-old makes UGC for skincare brands. $1,500/mo. 10 videos.'
+  }
+];
+
+/* ---------- Data: FAQ ---------- */
+const FAQS = [
+  {
+    q: 'Do I need my parents permission?',
+    a: 'For most online platforms (Etsy, eBay, PayPal, Stripe), yes — you need to be 18+ or use a parent account. For local services like dog walking, tutoring, or cleaning, you can often start directly with neighbors and family friends. Always be transparent with your parents about what you are doing and how much you are earning.'
+  },
+  {
+    q: 'How much can I realistically make?',
+    a: 'It depends entirely on hours and hustle. A 10-hour-per-week commitment at $20/hr effective rate = $800/mo. Some hustles (video editing, web dev, sneaker flipping) can hit $3k-$5k/mo with full-time effort. Most teens starting out make $200-$800/mo in their first 3 months. The calculator above gives you a realistic range.'
+  },
+  {
+    q: 'What if I have zero money to start?',
+    a: 'Filter for "Zero Cost Start" hustles. Tutoring, dog walking, social media management, video editing, and freelancing all cost $0 to begin. You only need a phone, internet, and time. Reinvest your first earnings into tools for the next hustle.'
+  },
+  {
+    q: 'How do I get my first client?',
+    a: 'Start within 5 miles of your house. Tell 10 people you know: family friends, neighbors, parents of classmates. Do your first 3 jobs at a discount or free in exchange for a testimonial and before/after photos. Those 3 reviews unlock paid work. Cold DMs work too, but local referrals convert 10x better when you have no portfolio.'
+  },
+  {
+    q: 'How do I get paid if Im under 18?',
+    a: 'Options: (1) Parent or guardian sets up PayPal/Stripe and you operate under their account. (2) Cash or Venmo for local services. (3) Prepaid debit cards linked to a parent account. (4) Some platforms like Fiverr allow 13+ with parental consent. Never lie about your age on financial platforms — accounts get frozen and funds get locked.'
+  },
+  {
+    q: 'Is this legal? Do I need to pay taxes?',
+    a: 'Yes, it is legal for teens to earn money. In the US, if you earn over $400 in self-employment income, you technically need to file a tax return. Most teens earning under $12,000/year owe little to nothing, but you should file to be safe. Keep records of all income and expenses. Ask a parent to help you file, or use free tools like FreeTaxUSA.'
+  },
+  {
+    q: 'How do I balance this with school?',
+    a: 'Cap yourself at 10-15 hours per week during the school year. Weekends are your money days. Batch your work: one day for client work, one day for admin. If grades slip, cut hours immediately. The hustle will still be there in the summer — your GPA will not recover as easily.'
+  },
+  {
+    q: 'What if I fail or make no money?',
+    a: 'You will, at first. Most hustles take 60-90 days before real money shows up. The ones who succeed are the ones who keep going after month 3. Pick one hustle, commit for 90 days, then evaluate. If it is not working, switch — but do not switch every 2 weeks. That is the only real failure mode.'
+  }
+];
+
+/* ---------- State ---------- */
+const state = {
+  category: 'all',
+  search: '',
+  sort: 'default',
+  saved: JSON.parse(localStorage.getItem('hustle_saved') || '[]'),
+  completed: JSON.parse(localStorage.getItem('hustle_completed') || '[]')
+};
+
+/* ---------- DOM Refs ---------- */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+const grid = $('#hustleGrid');
+const searchInput = $('#searchInput');
+const sortSelect = $('#sortSelect');
+const categoryChips = $('#categoryChips');
+const modalOverlay = $('#modalOverlay');
+const modalHead = $('#modalHead');
+const modalBody = $('#modalBody');
+const modalClose = $('#modalClose');
+const toastWrap = $('#toastWrap');
+
+/* ---------- Utility ---------- */
+function formatMoney(n) {
+  if (n >= 1000) return '$' + (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'k';
+  return '$' + n;
+}
+
+function formatMoneyFull(n) {
+  return '$' + n.toLocaleString();
+}
+
+function difficultyDots(n) {
+  let html = '<div class="card-diff">';
+  for (let i = 1; i <= 5; i++) {
+    html += `<span class="dot${i <= n ? ' on' : ''}"></span>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function categoryLabel(cat) {
+  const map = {
+    digital: 'Digital',
+    creative: 'Creative',
+    tech: 'Tech',
+    service: 'Service',
+    physical: 'Physical',
+    flip: 'Flip & Resell'
+  };
+  return map[cat] || cat;
+}
+
+function showToast(msg, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = 'toast' + (type === 'error' ? ' error' : '');
+  toast.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      ${type === 'error'
+        ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+        : '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'}
+    </svg>
+    <span>${msg}</span>
+  `;
+  toastWrap.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('show'));
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
+}
+
+/* ---------- Render: Stats Bar ---------- */
+function renderStats() {
+  const total = HUSTLES.length;
+  const topMonthly = Math.max(...HUSTLES.map(h => h.earnHigh));
+  const freeStart = HUSTLES.filter(h => h.startup === 0).length;
+  const fastStart = HUSTLES.filter(h => {
+    const t = h.timeToStart.toLowerCase();
+    return t.includes('day') || t.includes('1 week') || t.includes('1-2 week');
+  }).length;
+
+  animateNumber($('#statTotal'), total, '');
+  animateNumber($('#statEarning'), topMonthly, '$', true);
+  animateNumber($('#statFree'), freeStart, '');
+  animateNumber($('#statFast'), fastStart, '');
+}
+
+function animateNumber(el, target, prefix = '', isMoney = false) {
+  const duration = 1200;
+  const start = performance.now();
+  const from = 0;
+  function tick(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const val = Math.round(from + (target - from) * eased);
+    el.textContent = isMoney ? prefix + val.toLocaleString() : prefix + val;
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ---------- Render: Grid ---------- */
+function getFilteredHustles() {
+  let list = [...HUSTLES];
+
+  if (state.category !== 'all') {
+    list = list.filter(h => h.category === state.category);
+  }
+
+  if (state.search.trim()) {
+    const q = state.search.toLowerCase().trim();
+    list = list.filter(h =>
+      h.title.toLowerCase().includes(q) ||
+      h.desc.toLowerCase().includes(q) ||
+      h.tags.some(t => t.toLowerCase().includes(q)) ||
+      h.category.toLowerCase().includes(q)
+    );
+  }
+
+  switch (state.sort) {
+    case 'earn-high':
+      list.sort((a, b) => b.earnHigh - a.earnHigh);
+      break;
+    case 'earn-low':
+      list.sort((a, b) => a.earnLow - b.earnLow);
+      break;
+    case 'fast':
+      list.sort((a, b) => {
+        const order = { '1 day': 1, '1-3 days': 2, '2-3 days': 3, '3 days': 4, '1 week': 5 };
+        return (order[a.timeToStart] || 99) - (order[b.timeToStart] || 99);
+      });
+      break;
+    case 'easy':
+      list.sort((a, b) => a.difficulty - b.difficulty);
+      break;
+    case 'az':
+      list.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+  }
+
+  return list;
+}
+
+function renderGrid() {
+  const list = getFilteredHustles();
+  grid.innerHTML = '';
+
+  if (list.length === 0) {
+    grid.innerHTML = `
+      <div class="empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <h3>No hustles match your filters</h3>
+        <p>Try a different category or clear your search.</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.forEach((h, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.setProperty('--card-grad', h.grad);
+    card.style.setProperty('--card-bg', h.grad);
+    card.style.animation = `fadeUp .5s ease ${i * 0.03}s both`;
+    card.dataset.id = h.id;
+
+    const isSaved = state.saved.includes(h.id);
+
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-icon" style="background:${h.grad}">${h.icon}</div>
+        <button class="card-save${isSaved ? ' saved' : ''}" data-save="${h.id}" aria-label="Save">
+          <svg viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+      </div>
+      <h3>${h.title}</h3>
+      <p class="card-desc">${h.desc}</p>
+      <div class="card-meta">
+        <span class="meta-tag">${categoryLabel(h.category)}</span>
+        <span class="meta-tag">${h.timeToStart}</span>
+        <span class="meta-tag">${h.startup === 0 ? 'Free start' : '$' + h.startup + ' start'}</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-earn">
+          <span class="amt">${formatMoney(h.earnLow)}–${formatMoney(h.earnHigh)}</span>
+          <span class="per">per ${h.per}</span>
+        </div>
+        ${difficultyDots(h.difficulty)}
+      </div>
+    `;
+
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('[data-save]')) return;
+      openModal(h.id);
+    });
+
+    grid.appendChild(card);
+  });
+
+  // Save buttons
+  $$('[data-save]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSave(btn.dataset.save, btn);
+    });
+  });
+}
+
+/* ---------- Save / Bookmark ---------- */
+function toggleSave(id, btn) {
+  const idx = state.saved.indexOf(id);
+  if (idx > -1) {
+    state.saved.splice(idx, 1);
+    btn.classList.remove('saved');
+    btn.querySelector('svg').setAttribute('fill', 'none');
+    showToast('Removed from saved');
+  } else {
+    state.saved.push(id);
+    btn.classList.add('saved');
+    btn.querySelector('svg').setAttribute('fill', 'currentColor');
+    showToast('Saved to your list');
+  }
+  localStorage.setItem('hustle_saved', JSON.stringify(state.saved));
+}
+
+/* ---------- Modal ---------- */
+function openModal(id) {
+  const h = HUSTLES.find(x => x.id === id);
+  if (!h) return;
+
+  modalHead.innerHTML = `
+    <div class="card-icon" style="background:${h.grad}">${h.icon}</div>
+    <h2>${h.title}</h2>
+    <p>${h.desc}</p>
+  `;
+
+  const isSaved = state.saved.includes(h.id);
+  const isCompleted = state.completed.includes(h.id);
+
+  modalBody.innerHTML = `
+    <div class="modal-stats">
+      <div class="modal-stat">
+        <div class="v">${formatMoney(h.earnLow)}–${formatMoney(h.earnHigh)}</div>
+        <div class="l">Per ${h.per}</div>
+      </div>
+      <div class="modal-stat">
+        <div class="v">${h.startup === 0 ? 'Free' : '$' + h.startup}</div>
+        <div class="l">Startup Cost</div>
+      </div>
+      <div class="modal-stat">
+        <div class="v">${h.timeToStart}</div>
+        <div class="l">Time to Start</div>
+      </div>
+    </div>
+
+    <h4>Tools You Need</h4>
+    <ul>${h.tools.map(t => `<li>${t}</li>`).join('')}</ul>
+
+    <h4>The Playbook</h4>
+    <ul>${h.steps.map(s => `<li>${s}</li>`).join('')}</ul>
+
+    <h4>Pro Tips</h4>
+    <ul>${h.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+
+    <h4>Watch Out For</h4>
+    <ul><li>${h.risks}</li></ul>
+
+    <h4>Age & Legal</h4>
+    <ul><li>${h.ageNote}</li></ul>
+
+    <h4>Real Example</h4>
+    <ul><li>${h.example}</li></ul>
+
+    <div class="modal-actions">
+      <button class="btn ${isSaved ? 'btn-primary' : 'btn-ghost'}" id="modalSave">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        ${isSaved ? 'Saved' : 'Save Hustle'}
+      </button>
+      <button class="btn ${isCompleted ? 'btn-primary' : 'btn-ghost'}" id="modalComplete">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        ${isCompleted ? 'Completed' : 'Mark as Started'}
+      </button>
+    </div>
+  `;
+
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  $('#modalSave').addEventListener('click', () => {
+    toggleSave(h.id, null);
+    const btn = $('#modalSave');
+    const nowSaved = state.saved.includes(h.id);
+    btn.className = 'btn ' + (nowSaved ? 'btn-primary' : 'btn-ghost');
+    btn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="${nowSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      ${nowSaved ? 'Saved' : 'Save Hustle'}
+    `;
+    renderGrid();
+  });
+
+  $('#modalComplete').addEventListener('click', () => {
+    const idx = state.completed.indexOf(h.id);
+    if (idx > -1) {
+      state.completed.splice(idx, 1);
+    } else {
+      state.completed.push(h.id);
+    }
+    localStorage.setItem('hustle_completed', JSON.stringify(state.completed));
+    const nowDone = state.completed.includes(h.id);
+    const btn = $('#modalComplete');
+    btn.className = 'btn ' + (nowDone ? 'btn-primary' : 'btn-ghost');
+    btn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      ${nowDone ? 'Completed' : 'Mark as Started'}
+    `;
+    showToast(nowDone ? 'Marked as started' : 'Unmarked');
+  });
+}
+
+function closeModal() {
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ---------- Render: FAQ ---------- */
+function renderFAQ() {
+  const faqList = $('#faqList');
+  faqList.innerHTML = FAQS.map((f, i) => `
+    <div class="faq-item" data-faq="${i}">
+      <button class="faq-q">
+        <span>${f.q}</span>
+        <span class="icon"></span>
+      </button>
+      <div class="faq-a">${f.a}</div>
+    </div>
+  `).join('');
+
+  $$('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      $$('.faq-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+}
+
+/* ---------- Calculator ---------- */
+function initCalculator() {
+  const hours = $('#calcHours');
+  const rate = $('#calcRate');
+  const weeks = $('#calcWeeks');
+  const hoursVal = $('#calcHoursVal');
+  const rateVal = $('#calcRateVal');
+  const weeksVal = $('#calcWeeksVal');
+  const annual = $('#calcAnnual');
+  const breakdown = $('#calcBreakdown');
+  const summary = $('#calcSummary');
+
+  function update() {
+    const h = +hours.value;
+    const r = +rate.value;
+    const w = +weeks.value;
+
+    const weekly = h * r;
+    const monthly = weekly * 4.33;
+    const yearly = weekly * w;
+
+    hoursVal.textContent = h + ' hr' + (h !== 1 ? 's' : '');
+    rateVal.textContent = '$' + r + '/hr';
+    weeksVal.textContent = w + ' wk' + (w !== 1 ? 's' : '');
+
+    annual.textContent = formatMoneyFull(Math.round(yearly));
+    breakdown.textContent = `${formatMoneyFull(Math.round(weekly))}/wk · ${formatMoneyFull(Math.round(monthly))}/mo`;
+    summary.textContent = `${h} hrs/wk @ $${r}/hr for ${w} weeks`;
+  }
+
+  [hours, rate, weeks].forEach(el => el.addEventListener('input', update));
+  update();
+}
+
+/* ---------- Hero Counter ---------- */
+function initHeroCounters() {
+  $$('[data-count]').forEach(el => {
+    const target = +el.dataset.count;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1600;
+    const start = performance.now();
+
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = Math.round(target * eased);
+      el.textContent = prefix + val.toLocaleString() + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ---------- Nav ---------- */
+function initNav() {
+  const nav = $('#nav');
+  const burger = $('#navBurger');
+  const links = $('#navLinks');
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+
+  $$('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+
+  $$('[data-jump]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const cat = link.dataset.jump;
+      state.category = cat;
+      state.search = '';
+      state.sort = 'default';
+      searchInput.value = '';
+      sortSelect.value = 'default';
+      $$('.chip').forEach(c => c.classList.toggle('active', c.dataset.cat === cat));
+      renderGrid();
+      document.getElementById('hustles').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+}
+
+/* ---------- Filter Events ---------- */
+function initFilters() {
+  categoryChips.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    state.category = chip.dataset.cat;
+    $$('.chip').forEach(c => c.classList.toggle('active', c === chip));
+    renderGrid();
+  });
+
+  let searchTimeout;
+  searchInput.addEventListener('input', () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      state.search = searchInput.value;
+      renderGrid();
+    }, 150);
+  });
+
+  sortSelect.addEventListener('change', () => {
+    state.sort = sortSelect.value;
+    renderGrid();
+  });
+}
+
+/* ---------- Modal Events ---------- */
+function initModal() {
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+}
+
+/* ---------- Reveal on Scroll ---------- */
+function initReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  $$('.reveal').forEach(el => observer.observe(el));
+}
+
+/* ---------- Background Canvas ---------- */
+function initCanvas() {
+  const canvas = $('#bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  const particles = [];
+  const PARTICLE_COUNT = 60;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function makeParticle() {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.5 + 0.5,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      a: Math.random() * 0.5 + 0.1
+    };
+  }
+
+  function init() {
+    resize();
+    particles.length = 0;
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(makeParticle());
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0,229,160,${0.08 * (1 - dist / 140)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw particles
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,229,160,${p.a})`;
+      ctx.fill();
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', init);
+  init();
+  draw();
+}
+
+/* ---------- Init ---------- */
+function init() {
+  renderStats();
+  renderGrid();
+  renderFAQ();
+  initCalculator();
+  initHeroCounters();
+  initNav();
+  initFilters();
+  initModal();
+  initReveal();
+  initCanvas();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
